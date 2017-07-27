@@ -71,8 +71,18 @@ public class MainActivity extends Activity {
 ```js
 import * as CacheManager from 'react-native-http-cache';
 
-// invoke API directly when in need
-CacheManager.clear();
+// 清理所有的缓存
+async clearCache(){
+        await Promise.all([httpCache.clearHttpCache(), httpCache.clearImageCache()]);
+}
+
+// 获取缓存大小
+async getCacheSize(){
+        let arr = await Promise.all([httpCache.getHttpCacheSize(), httpCache.getImageCacheSize()]);
+        size = Math.ceil( arr.reduce((a, b)=>a+b, 0) / 1024 / 1024 * 100) / 100
+        });
+}
+
 
 ```
 
